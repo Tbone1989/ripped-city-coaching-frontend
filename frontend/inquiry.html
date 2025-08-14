@@ -322,7 +322,7 @@
                 const formData = new FormData(this);
                 const data = Object.fromEntries(formData.entries());
                 
-                const response = await fetch('/api/inquiry', {
+                const response = await fetch('https://ripped-city-coaching-backend-production.up.railway.app/api/inquiry', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
