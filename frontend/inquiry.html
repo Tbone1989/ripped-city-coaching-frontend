@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Consultation - RippedCity Coaching</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .form-container {
+            padding: 40px 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .benefits {
+            background: #f8f9fa;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+
+        .benefits h3 {
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .benefits ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefits li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .benefits li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .error-message {
+            display: none;
+            background: #f8d7da;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .container {
+                margin: 10px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .form-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏋️ Free Consultation</h1>
+            <p>Start Your Transformation Journey Today</p>
+        </div>
+
+        <div class="form-container">
+            <div class="success-message" id="successMessage">
+                <h3>Thank You!</h3>
+                <p>Your consultation request has been submitted. We'll contact you within 24 hours to discuss your fitness goals and create a personalized plan just for you.</p>
+            </div>
+
+            <div class="error-message" id="errorMessage">
+                <p>There was an error submitting your request. Please try again.</p>
+            </div>
+
+            <div class="benefits">
+                <h3>What You'll Get in Your Free Consultation:</h3>
+                <ul>
+                    <li>Personalized fitness assessment</li>
+                    <li>Custom nutrition plan discussion</li>
+                    <li>Goal setting and timeline planning</li>
+                    <li>Program recommendations tailored to you</li>
+                    <li>Pricing options that fit your budget</li>
+                </ul>
+            </div>
+
+            <form id="inquiryForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="first_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="last_name" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="fitnessLevel">Current Fitness Level *</label>
+                    <select id="fitnessLevel" name="current_fitness_level" required>
+                        <option value="">Select your fitness level</option>
+                        <option value="beginner">Beginner (Just starting out)</option>
+                        <option value="intermediate">Intermediate (Some experience)</option>
+                        <option value="advanced">Advanced (Very experienced)</option>
+                        <option value="athlete">Athlete/Competitive</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="fitnessGoals">What are your fitness goals? *</label>
+                    <textarea id="fitnessGoals" name="fitness_goals" placeholder="Tell us about your fitness goals, what you want to achieve, and any specific challenges you're facing..." required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contactMethod">Preferred Contact Method *</label>
+                        <select id="contactMethod" name="preferred_contact_method" required>
+                            <option value="">How should we contact you?</option>
+                            <option value="phone">Phone Call</option>
+                            <option value="email">Email</option>
+                            <option value="text">Text Message</option>
+                            <option value="video">Video Call</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bestTime">Best Time to Contact</label>
+                        <select id="bestTime" name="best_time_to_contact">
+                            <option value="">Select best time</option>
+                            <option value="morning">Morning (8AM - 12PM)</option>
+                            <option value="afternoon">Afternoon (12PM - 5PM)</option>
+                            <option value="evening">Evening (5PM - 8PM)</option>
+                            <option value="weekend">Weekends</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="additionalInfo">Additional Information</label>
+                    <textarea id="additionalInfo" name="additional_info" placeholder="Any injuries, dietary restrictions, or other information we should know about?"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="urgent" name="urgent">
+                        <label for="urgent">This is urgent - I'd like to be contacted today</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Request Free Consultation
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('inquiryForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Hide previous messages
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            
+            try {
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData.entries());
+                
+                const response = await fetch('/api/inquiry', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    successMessage.style.display = 'block';
+                    this.style.display = 'none';
+                    
+                    // Scroll to success message
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    throw new Error(result.error || 'Submission failed');
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                errorMessage.style.display = 'block';
+                errorMessage.scrollIntoView({ behavior: 'smooth' });
+                
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Request Free Consultation';
+            }
+        });
+    </script>
+</body>
+</html>
+

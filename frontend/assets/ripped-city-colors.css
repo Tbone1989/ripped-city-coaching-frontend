@@ -1,0 +1,178 @@
+/* Ripped City Inc. Brand Colors */
+:root {
+  /* Primary Colors */
+  --ripped-city-red: #DC2626;        /* Main brand red */
+  --ripped-city-dark-red: #B91C1C;   /* Darker red for hover states */
+  --ripped-city-light-red: #FEE2E2;  /* Light red for backgrounds */
+  
+  /* Secondary Colors */
+  --ripped-city-black: #111827;      /* Deep black */
+  --ripped-city-gray: #374151;       /* Dark gray */
+  --ripped-city-light-gray: #F3F4F6; /* Light gray backgrounds */
+  
+  /* Accent Colors */
+  --ripped-city-white: #FFFFFF;      /* Pure white */
+  --ripped-city-orange: #EA580C;     /* Energy orange accent */
+  --ripped-city-yellow: #F59E0B;     /* Warning/highlight yellow */
+  
+  /* Status Colors */
+  --ripped-city-success: #059669;    /* Success green */
+  --ripped-city-warning: #D97706;    /* Warning amber */
+  --ripped-city-error: #DC2626;      /* Error red (same as primary) */
+  --ripped-city-info: #2563EB;       /* Info blue */
+  
+  /* Gradient Combinations */
+  --ripped-city-gradient-primary: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+  --ripped-city-gradient-secondary: linear-gradient(135deg, #111827 0%, #374151 100%);
+  --ripped-city-gradient-accent: linear-gradient(135deg, #EA580C 0%, #DC2626 100%);
+}
+
+/* Color Classes */
+.ripped-city-bg-primary { background-color: var(--ripped-city-red); }
+.ripped-city-bg-secondary { background-color: var(--ripped-city-black); }
+.ripped-city-bg-light { background-color: var(--ripped-city-light-gray); }
+
+.ripped-city-text-primary { color: var(--ripped-city-red); }
+.ripped-city-text-secondary { color: var(--ripped-city-black); }
+.ripped-city-text-white { color: var(--ripped-city-white); }
+
+.ripped-city-border-primary { border-color: var(--ripped-city-red); }
+.ripped-city-border-secondary { border-color: var(--ripped-city-gray); }
+
+/* Button Styles */
+.ripped-city-btn-primary {
+  background: var(--ripped-city-gradient-primary);
+  color: var(--ripped-city-white);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.ripped-city-btn-primary:hover {
+  background: var(--ripped-city-dark-red);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.ripped-city-btn-secondary {
+  background: var(--ripped-city-gradient-secondary);
+  color: var(--ripped-city-white);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.ripped-city-btn-secondary:hover {
+  background: var(--ripped-city-gray);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(55, 65, 81, 0.3);
+}
+
+/* Card Styles */
+.ripped-city-card {
+  background: var(--ripped-city-white);
+  border: 1px solid var(--ripped-city-light-gray);
+  box-shadow: 0 2px 8px rgba(17, 24, 39, 0.1);
+  transition: all 0.3s ease;
+}
+
+.ripped-city-card:hover {
+  box-shadow: 0 8px 25px rgba(17, 24, 39, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Header Styles */
+.ripped-city-header {
+  background: var(--ripped-city-gradient-secondary);
+  color: var(--ripped-city-white);
+}
+
+.ripped-city-nav-link {
+  color: var(--ripped-city-white);
+  transition: color 0.3s ease;
+}
+
+.ripped-city-nav-link:hover {
+  color: var(--ripped-city-red);
+}
+
+/* Status Badge Styles */
+.ripped-city-badge-active {
+  background: var(--ripped-city-success);
+  color: var(--ripped-city-white);
+}
+
+.ripped-city-badge-warning {
+  background: var(--ripped-city-warning);
+  color: var(--ripped-city-white);
+}
+
+.ripped-city-badge-error {
+  background: var(--ripped-city-error);
+  color: var(--ripped-city-white);
+}
+
+/* Form Styles */
+.ripped-city-input {
+  border: 2px solid var(--ripped-city-light-gray);
+  transition: border-color 0.3s ease;
+}
+
+.ripped-city-input:focus {
+  border-color: var(--ripped-city-red);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+/* Progress Bar Styles */
+.ripped-city-progress {
+  background: var(--ripped-city-light-gray);
+}
+
+.ripped-city-progress-fill {
+  background: var(--ripped-city-gradient-primary);
+}
+
+/* Table Styles */
+.ripped-city-table-header {
+  background: var(--ripped-city-light-gray);
+  color: var(--ripped-city-black);
+}
+
+.ripped-city-table-row:hover {
+  background: var(--ripped-city-light-red);
+}
+
+/* Modal Styles */
+.ripped-city-modal {
+  background: rgba(17, 24, 39, 0.8);
+}
+
+.ripped-city-modal-content {
+  background: var(--ripped-city-white);
+  border: 1px solid var(--ripped-city-light-gray);
+}
+
+/* Alert Styles */
+.ripped-city-alert-success {
+  background: #ECFDF5;
+  border-left: 4px solid var(--ripped-city-success);
+  color: #065F46;
+}
+
+.ripped-city-alert-error {
+  background: #FEF2F2;
+  border-left: 4px solid var(--ripped-city-error);
+  color: #991B1B;
+}
+
+.ripped-city-alert-warning {
+  background: #FFFBEB;
+  border-left: 4px solid var(--ripped-city-warning);
+  color: #92400E;
+}
+
+.ripped-city-alert-info {
+  background: #EFF6FF;
+  border-left: 4px solid var(--ripped-city-info);
+  color: #1E40AF;
+}
+

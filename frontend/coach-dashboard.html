@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coach Dashboard - RippedCity Coaching</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8fafc;
+        }
+
+        .header {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-tab {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 500;
+            color: #6b7280;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .nav-tab.active {
+            color: #2563eb;
+            border-bottom-color: #2563eb;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid #e5e7eb;
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .stat-title {
+            color: #6b7280;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .stat-change {
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .stat-change.positive {
+            color: #10b981;
+        }
+
+        .stat-change.negative {
+            color: #ef4444;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid #e5e7eb;
+            margin-bottom: 30px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #1f2937;
+        }
+
+        .btn {
+            background: #2563eb;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+
+        .btn-success {
+            background: #10b981;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table th,
+        .table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .table th {
+            background: #f9fafb;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .table tr:hover {
+            background: #f9fafb;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-new {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .status-contacted {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .status-converted {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .status-paid {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .priority-high {
+            color: #ef4444;
+            font-weight: 600;
+        }
+
+        .priority-medium {
+            color: #f59e0b;
+            font-weight: 600;
+        }
+
+        .priority-low {
+            color: #6b7280;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .notification {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid;
+        }
+
+        .notification.high {
+            background: #fef2f2;
+            border-color: #ef4444;
+            color: #991b1b;
+        }
+
+        .notification.medium {
+            background: #fffbeb;
+            border-color: #f59e0b;
+            color: #92400e;
+        }
+
+        .ai-content-card {
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .ai-content-card.pending {
+            border-color: #f59e0b;
+            background: #fffbeb;
+        }
+
+        .ai-content-card.approved {
+            border-color: #10b981;
+            background: #ecfdf5;
+        }
+
+        .login-form {
+            max-width: 400px;
+            margin: 100px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .error-message {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .table {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Form -->
+    <div id="loginSection">
+        <div class="login-form">
+            <h2 style="text-align: center; margin-bottom: 30px; color: #2563eb;">Coach Login</h2>
+            
+            <div id="loginError" class="error-message hidden"></div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                
+                <button type="submit" class="btn">Login to Dashboard</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboardSection" class="hidden">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">🏋️ RippedCity Coaching - Coach Dashboard</div>
+                <nav class="nav-tabs">
+                    <button class="nav-tab active" onclick="showTab('overview')">Overview</button>
+                    <button class="nav-tab" onclick="showTab('clients')">Clients</button>
+                    <button class="nav-tab" onclick="showTab('leads')">Leads</button>
+                    <button class="nav-tab" onclick="showTab('ai-content')">AI Content</button>
+                    <button class="nav-tab" onclick="showTab('notifications')">Notifications</button>
+                </nav>
+                <div class="user-menu">
+                    <span id="coachName">Coach</span>
+                    <button class="btn btn-secondary" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <!-- Overview Tab -->
+            <div id="overview" class="tab-content active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-title">Total Revenue</div>
+                        <div class="stat-number" id="totalRevenue">$0</div>
+                        <div class="stat-change positive" id="revenueChange">+12.5% from last month</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Active Clients</div>
+                        <div class="stat-number" id="activeClients">0</div>
+                        <div class="stat-change positive" id="clientsChange">+8 new this week</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Conversion Rate</div>
+                        <div class="stat-number" id="conversionRate">0%</div>
+                        <div class="stat-change positive" id="conversionChange">Above industry avg</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">AI Time Saved</div>
+                        <div class="stat-number" id="timeSaved">0h</div>
+                        <div class="stat-change positive">Daily automation</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>🔔 Recent Activity</h3>
+                    <div id="recentActivity">
+                        <p>Loading recent activity...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clients Tab -->
+            <div id="clients" class="tab-content">
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3>👥 Client Management</h3>
+                        <button class="btn" onclick="refreshClients()">Refresh</button>
+                    </div>
+                    
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Joined</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clientsTable">
+                            <tr>
+                                <td colspan="5">Loading clients...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Leads Tab -->
+            <div id="leads" class="tab-content">
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3>🎯 Lead Management</h3>
+                        <button class="btn" onclick="refreshLeads()">Refresh</button>
+                    </div>
+                    
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Priority</th>
+                                <th>Next Follow-up</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leadsTable">
+                            <tr>
+                                <td colspan="6">Loading leads...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- AI Content Tab -->
+            <div id="ai-content" class="tab-content">
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3>🤖 AI Content Approval</h3>
+                        <button class="btn" onclick="refreshAIContent()">Refresh</button>
+                    </div>
+                    
+                    <div id="pendingApprovals">
+                        <p>Loading pending approvals...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notifications Tab -->
+            <div id="notifications" class="tab-content">
+                <div class="card">
+                    <h3>🔔 Notifications & Alerts</h3>
+                    <div id="notificationsList">
+                        <p>Loading notifications...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="clientModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('clientModal')">&times;</span>
+            <h3>Client Details</h3>
+            <div id="clientDetails"></div>
+        </div>
+    </div>
+
+    <div id="leadModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('leadModal')">&times;</span>
+            <h3>Lead Management</h3>
+            <div id="leadDetails"></div>
+        </div>
+    </div>
+
+    <div id="aiContentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('aiContentModal')">&times;</span>
+            <h3>AI Content Review</h3>
+            <div id="aiContentDetails"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentCoach = null;
+        let authToken = null;
+        let currentTab = 'overview';
+
+        // Check if coach is already logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('coachAuthToken');
+            if (token) {
+                verifyToken(token);
+            }
+        });
+
+        // Login form submission
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                showError('Please enter both email and password.');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/auth/login-coach', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    authToken = result.token;
+                    currentCoach = result.coach;
+                    localStorage.setItem('coachAuthToken', authToken);
+                    showDashboard();
+                    loadDashboardData();
+                } else {
+                    showError(result.error || 'Login failed. Please check your credentials.');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showError('An error occurred during login. Please try again.');
+            }
+        });
+
+        async function verifyToken(token) {
+            try {
+                const response = await fetch('/api/auth/verify-token', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.valid && result.user_type === 'coach') {
+                    authToken = token;
+                    currentCoach = result.user;
+                    showDashboard();
+                    loadDashboardData();
+                } else {
+                    localStorage.removeItem('coachAuthToken');
+                    showLogin();
+                }
+            } catch (error) {
+                console.error('Token verification error:', error);
+                localStorage.removeItem('coachAuthToken');
+                showLogin();
+            }
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('loginError');
+            errorDiv.textContent = message;
+            errorDiv.classList.remove('hidden');
+        }
+
+        function showLogin() {
+            document.getElementById('loginSection').classList.remove('hidden');
+            document.getElementById('dashboardSection').classList.add('hidden');
+        }
+
+        function showDashboard() {
+            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('dashboardSection').classList.remove('hidden');
+            
+            if (currentCoach) {
+                document.getElementById('coachName').textContent = `${currentCoach.first_name} ${currentCoach.last_name}`;
+            }
+        }
+
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            currentTab = tabName;
+
+            // Load tab-specific data
+            if (tabName === 'clients') {
+                loadClients();
+            } else if (tabName === 'leads') {
+                loadLeads();
+            } else if (tabName === 'ai-content') {
+                loadAIContent();
+            } else if (tabName === 'notifications') {
+                loadNotifications();
+            }
+        }
+
+        async function loadDashboardData() {
+            await Promise.all([
+                loadStats(),
+                loadRecentActivity()
+            ]);
+        }
+
+        async function loadStats() {
+            try {
+                const response = await fetch('/api/dashboard/stats', {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    const stats = result.stats;
+                    document.getElementById('totalRevenue').textContent = `$${stats.revenue.total.toLocaleString()}`;
+                    document.getElementById('activeClients').textContent = stats.clients.paid;
+                    document.getElementById('conversionRate').textContent = `${stats.leads.conversion_rate}%`;
+                    document.getElementById('timeSaved').textContent = '15.4h';
+                }
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        async function loadRecentActivity() {
+            try {
+                const response = await fetch('/api/dashboard/recent-activity', {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    const activityHtml = result.activities.slice(0, 10).map(activity => `
+                        <div class="notification ${activity.priority}">
+                            <strong>${activity.description}</strong>
+                            <div style="font-size: 0.9rem; margin-top: 5px; opacity: 0.8;">
+                                ${new Date(activity.timestamp).toLocaleString()}
+                            </div>
+                        </div>
+                    `).join('');
+                    
+                    document.getElementById('recentActivity').innerHTML = activityHtml || '<p>No recent activity.</p>';
+                }
+            } catch (error) {
+                console.error('Error loading recent activity:', error);
+            }
+        }
+
+        async function loadClients() {
+            try {
+                const response = await fetch('/api/clients/all', {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    const clientsHtml = result.clients.map(client => `
+                        <tr>
+                            <td>${client.first_name} ${client.last_name}</td>
+                            <td>${client.email}</td>
+                            <td><span class="status-badge status-${client.payment_status}">${client.payment_status}</span></td>
+                            <td>${new Date(client.created_at).toLocaleDateString()}</td>
+                            <td>
+                                <button class="btn btn-small" onclick="viewClient(${client.id})">View</button>
+                                <button class="btn btn-small btn-success" onclick="generateAIContent(${client.id})">Generate AI</button>
+                            </td>
+                        </tr>
+                    `).join('');
+                    
+                    document.getElementById('clientsTable').innerHTML = clientsHtml || '<tr><td colspan="5">No clients found.</td></tr>';
+                }
+            } catch (error) {
+                console.error('Error loading clients:', error);
+            }
+        }
+
+        async function loadLeads() {
+            try {
+                const response = await fetch('/api/leads/all', {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    const leadsHtml = result.leads.map(lead => `
+                        <tr>
+                            <td>${lead.client.first_name} ${lead.client.last_name}</td>
+                            <td>${lead.client.email}</td>
+                            <td><span class="status-badge status-${lead.status}">${lead.status}</span></td>
+                            <td><span class="priority-${lead.priority}">${lead.priority}</span></td>
+                            <td>${lead.next_follow_up ? new Date(lead.next_follow_up).toLocaleDateString() : 'Not scheduled'}</td>
+                            <td>
+                                <button class="btn btn-small" onclick="manageLead(${lead.id})">Manage</button>
+                                <button class="btn btn-small btn-secondary" onclick="contactLead(${lead.id})">Contact</button>
+                            </td>
+                        </tr>
+                    `).join('');
+                    
+                    document.getElementById('leadsTable').innerHTML = leadsHtml || '<tr><td colspan="6">No leads found.</td></tr>';
+                }
+            } catch (error) {
+                console.error('Error loading leads:', error);
+            }
+        }
+
+        async function loadAIContent() {
+            try {
+                const response = await fetch('/api/ai/pending-approvals', {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    let contentHtml = '';
+                    
+                    result.pending_workout_plans.forEach(plan => {
+                        contentHtml += `
+                            <div class="ai-content-card pending">
+                                <h4>🏋️ Workout Plan: ${plan.title}</h4>
+                                <p><strong>Client:</strong> ${plan.client.first_name} ${plan.client.last_name}</p>
+                                <p><strong>Created:</strong> ${new Date(plan.created_at).toLocaleDateString()}</p>
+                                <div style="margin-top: 15px;">
+                                    <button class="btn btn-success btn-small" onclick="approveContent('workout', ${plan.id})">Approve</button>
+                                    <button class="btn btn-danger btn-small" onclick="rejectContent('workout', ${plan.id})">Reject</button>
+                                    <button class="btn btn-secondary btn-small" onclick="reviewContent('workout', ${plan.id})">Review</button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    result.pending_nutrition_plans.forEach(plan => {
+                        contentHtml += `
+                            <div class="ai-content-card pending">
+                                <h4>🥗 Nutrition Plan: ${plan.title}</h4>
+                                <p><strong>Client:</strong> ${plan.client.first_name} ${plan.client.last_name}</p>
+                                <p><strong>Created:</strong> ${new Date(plan.created_at).toLocaleDateString()}</p>
+                                <div style="margin-top: 15px;">
+                                    <button class="btn btn-success btn-small" onclick="approveContent('nutrition', ${plan.id})">Approve</button>
+                                    <button class="btn btn-danger btn-small" onclick="rejectContent('nutrition', ${plan.id})">Reject</button>
+                                    <button class="btn btn-secondary btn-small" onclick="reviewContent('nutrition', ${plan.id})">Review</button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    document.getElementById('pendingApprovals').innerHTML = contentHtml || '<p>No pending AI content approvals.</p>';
+                }
+            } catch (error) {
+                console.error('Error loading AI content:', error);
+            }
+        }
+
+        async function loadNotifications() {
+            try {
+                const response = await fetch('/api/dashboard/notifications', {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    const notificationsHtml = result.notifications.map(notification => `
+                        <div class="notification ${notification.priority}">
+                            <strong>${notification.title}</strong>
+                            <p>${notification.message}</p>
+                            <div style="font-size: 0.9rem; margin-top: 5px; opacity: 0.8;">
+                                ${new Date(notification.timestamp).toLocaleString()}
+                            </div>
+                        </div>
+                    `).join('');
+                    
+                    document.getElementById('notificationsList').innerHTML = notificationsHtml || '<p>No notifications.</p>';
+                }
+            } catch (error) {
+                console.error('Error loading notifications:', error);
+            }
+        }
+
+        // Action functions
+        function refreshClients() {
+            loadClients();
+        }
+
+        function refreshLeads() {
+            loadLeads();
+        }
+
+        function refreshAIContent() {
+            loadAIContent();
+        }
+
+        async function generateAIContent(clientId) {
+            if (confirm('Generate AI workout and nutrition plans for this client?')) {
+                try {
+                    // Generate workout plan
+                    await fetch(`/api/ai/generate-workout/${clientId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${authToken}`,
+                            'Content-Type': 'application/json',
+                        }
+                    });
+
+                    // Generate nutrition plan
+                    await fetch(`/api/ai/generate-nutrition/${clientId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${authToken}`,
+                            'Content-Type': 'application/json',
+                        }
+                    });
+
+                    alert('AI content generated successfully! Check the AI Content tab for approval.');
+                } catch (error) {
+                    console.error('Error generating AI content:', error);
+                    alert('Error generating AI content. Please try again.');
+                }
+            }
+        }
+
+        async function approveContent(type, planId) {
+            try {
+                const endpoint = type === 'workout' ? 'approve-workout' : 'approve-nutrition';
+                const response = await fetch(`/api/ai/${endpoint}/${planId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ approved: true })
+                });
+
+                if (response.ok) {
+                    alert('Content approved successfully!');
+                    loadAIContent();
+                } else {
+                    alert('Error approving content.');
+                }
+            } catch (error) {
+                console.error('Error approving content:', error);
+            }
+        }
+
+        async function rejectContent(type, planId) {
+            const notes = prompt('Reason for rejection (optional):');
+            try {
+                const endpoint = type === 'workout' ? 'approve-workout' : 'approve-nutrition';
+                const response = await fetch(`/api/ai/${endpoint}/${planId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        approved: false,
+                        coach_notes: notes || 'Rejected by coach'
+                    })
+                });
+
+                if (response.ok) {
+                    alert('Content rejected.');
+                    loadAIContent();
+                } else {
+                    alert('Error rejecting content.');
+                }
+            } catch (error) {
+                console.error('Error rejecting content:', error);
+            }
+        }
+
+        function reviewContent(type, planId) {
+            alert('Content review modal coming soon! For now, use approve/reject buttons.');
+        }
+
+        function viewClient(clientId) {
+            alert(`Client details modal coming soon! Client ID: ${clientId}`);
+        }
+
+        function manageLead(leadId) {
+            alert(`Lead management modal coming soon! Lead ID: ${leadId}`);
+        }
+
+        function contactLead(leadId) {
+            alert(`Lead contact modal coming soon! Lead ID: ${leadId}`);
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function logout() {
+            localStorage.removeItem('coachAuthToken');
+            authToken = null;
+            currentCoach = null;
+            showLogin();
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+
