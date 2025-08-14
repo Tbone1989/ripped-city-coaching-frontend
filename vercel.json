@@ -1,0 +1,36 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/inquiry.html",
+      "permanent": false
+    },
+    {
+      "source": "/index.html",
+      "destination": "/inquiry.html", 
+      "permanent": false
+    },
+    {
+      "source": "/business",
+      "destination": "/inquiry.html",
+      "permanent": false
+    },
+    {
+      "source": "/hub",
+      "destination": "/inquiry.html",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/inquiry.html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
+      ]
+    }
+  ]
+}
+
