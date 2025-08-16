@@ -1,33 +1,25 @@
 {
-  "redirects": [
+  "rewrites": [
     {
       "source": "/",
-      "destination": "/inquiry.html",
-      "permanent": false
-    },
-    {
-      "source": "/index.html",
-      "destination": "/inquiry.html", 
-      "permanent": false
-    },
-    {
-      "source": "/business",
-      "destination": "/inquiry.html",
-      "permanent": false
-    },
-    {
-      "source": "/hub",
-      "destination": "/inquiry.html",
-      "permanent": false
+      "destination": "/index.html"
     }
   ],
   "headers": [
     {
-      "source": "/inquiry.html",
+      "source": "/(.*)",
       "headers": [
         {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400"
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
         }
       ]
     }
