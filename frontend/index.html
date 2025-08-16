@@ -3,56 +3,1272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RippedCity Coaching - Free Consultation</title>
-    <meta name="description" content="Start your fitness transformation with RippedCity Coaching. Get your free consultation today.">
+    <title>RippedCity Coaching - Professional Fitness Coaching</title>
+    <meta name="description" content="Transform your fitness journey with RippedCity Coaching. Professional personal training and nutrition guidance.">
     
-    <!-- Immediate redirect to inquiry form -->
-    <meta http-equiv="refresh" content="0; url=/inquiry.html">
-    <script>
-        // JavaScript redirect as backup
-        window.location.replace("/inquiry.html");
-    </script>
-    
-    <!-- Fallback for users with JavaScript disabled -->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-            background: linear-gradient(135deg, #DC2626 0%, #000000 100%);
-            color: white;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .redirect-message {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 500px;
-            margin: 0 auto;
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #DC2626 0%, #000000 100%);
+            min-height: 100vh;
+            color: white;
         }
-        .redirect-link {
-            color: #ffffff;
-            text-decoration: none;
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-size: 24px;
             font-weight: bold;
-            font-size: 18px;
+            color: white;
+        }
+
+        .coach-login-btn {
             background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .coach-login-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 140px);
+            padding: 20px;
+        }
+
+        .content-wrapper {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 1200px;
+            width: 100%;
+            color: #333;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #DC2626;
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .benefits-list {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .benefits-list h3 {
+            color: #DC2626;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .benefit-item::before {
+            content: "✓";
+            color: #DC2626;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #DC2626;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .submit-btn, .btn {
+            background: #DC2626;
+            color: white;
+            border: none;
             padding: 15px 30px;
             border-radius: 5px;
-            display: inline-block;
-            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
             transition: background 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
         }
-        .redirect-link:hover {
-            background: rgba(255, 255, 255, 0.3);
+
+        .submit-btn:hover, .btn:hover {
+            background: #B91C1C;
+        }
+
+        .btn-secondary {
+            background: #666;
+        }
+
+        .btn-secondary:hover {
+            background: #555;
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        .login-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            background: #666;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .back-btn:hover {
+            background: #555;
+        }
+
+        .dashboard-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: #f8f9fa;
+            color: #333;
+            border: 2px solid #ddd;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn.active {
+            background: #DC2626;
+            color: white;
+            border-color: #DC2626;
+        }
+
+        .nav-btn:hover {
+            border-color: #DC2626;
+        }
+
+        .dashboard-content {
+            text-align: left;
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #DC2626;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #DC2626;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .data-table th {
+            background: #f8f9fa;
+            color: #DC2626;
+            font-weight: bold;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .product-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #ddd;
+            transition: border-color 0.3s ease;
+        }
+
+        .product-card:hover {
+            border-color: #DC2626;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 150px;
+            background: #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+
+        .social-post {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #DC2626;
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .post-platform {
+            background: #DC2626;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        .image-upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .image-upload-area:hover {
+            border-color: #DC2626;
+        }
+
+        .image-upload-area.dragover {
+            border-color: #DC2626;
+            background: rgba(220, 38, 38, 0.1);
+        }
+
+        .uploaded-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .uploaded-image {
+            position: relative;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .uploaded-image img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .image-actions {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .image-action-btn {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 5px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .content-editor {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .editor-toolbar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .editor-btn {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .editor-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .editor-content {
+            min-height: 200px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            outline: none;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+
+            .content-wrapper {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-nav {
+                flex-direction: column;
+            }
+
+            .nav-btn {
+                text-align: center;
+            }
+        }
+
+        .hidden {
+            display: none !important;
         }
     </style>
 </head>
 <body>
-    <div class="redirect-message">
-        <h1>🏋️ RippedCity Coaching</h1>
-        <p>Redirecting you to your free consultation form...</p>
-        <p>If you're not redirected automatically, <a href="/inquiry.html" class="redirect-link">click here</a></p>
-    </div>
+    <header class="header">
+        <div class="logo">🏋️ RippedCity Coaching</div>
+        <button class="coach-login-btn" onclick="showCoachLogin()">Coach Login</button>
+    </header>
+
+    <main class="main-container">
+        <div class="content-wrapper">
+            <!-- Client Inquiry Section (Landing Page) -->
+            <section id="inquiry-section" class="section active">
+                <h1 class="section-title">🏆 Free Consultation</h1>
+                <p class="section-subtitle">Start Your Transformation Journey Today</p>
+
+                <div class="benefits-list">
+                    <h3>What You'll Get in Your Free Consultation:</h3>
+                    <div class="benefit-item">Personalized fitness assessment</div>
+                    <div class="benefit-item">Custom nutrition plan discussion</div>
+                    <div class="benefit-item">Goal setting and timeline planning</div>
+                    <div class="benefit-item">Program recommendations tailored to you</div>
+                    <div class="benefit-item">Pricing options that fit your budget</div>
+                </div>
+
+                <form id="inquiry-form" onsubmit="submitInquiry(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fitnessLevel">Current Fitness Level *</label>
+                        <select id="fitnessLevel" name="fitnessLevel" required>
+                            <option value="">Select your fitness level</option>
+                            <option value="beginner">Beginner (Just starting out)</option>
+                            <option value="intermediate">Intermediate (Some experience)</option>
+                            <option value="advanced">Advanced (Very experienced)</option>
+                            <option value="athlete">Athlete/Competitive</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="goals">What are your fitness goals? *</label>
+                        <textarea id="goals" name="goals" placeholder="Tell us about your fitness goals, what you want to achieve, and any specific challenges you're facing..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Get My Free Consultation</button>
+                </form>
+            </section>
+
+            <!-- Coach Login Section -->
+            <section id="login-section" class="section">
+                <button class="back-btn" onclick="showInquiry()">← Back to Main</button>
+                <h2 class="section-title">Coach Login</h2>
+                <p class="section-subtitle">Access Your Business Dashboard</p>
+
+                <form class="login-form" onsubmit="coachLogin(event)">
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" name="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" name="loginPassword" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Login to Dashboard</button>
+                </form>
+            </section>
+
+            <!-- Coach Dashboard Section -->
+            <section id="dashboard-section" class="section">
+                <div class="dashboard-content">
+                    <button class="back-btn" onclick="logout()">← Logout</button>
+                    <h2 class="section-title">Business Dashboard</h2>
+                    <p class="section-subtitle">Complete Coaching Business Management</p>
+
+                    <!-- Dashboard Navigation -->
+                    <div class="dashboard-nav">
+                        <button class="nav-btn active" onclick="showDashboardTab('overview')">📊 Overview</button>
+                        <button class="nav-btn" onclick="showDashboardTab('leads')">👥 Leads</button>
+                        <button class="nav-btn" onclick="showDashboardTab('ecommerce')">🛒 E-Commerce</button>
+                        <button class="nav-btn" onclick="showDashboardTab('social')">📱 Social Media</button>
+                        <button class="nav-btn" onclick="showDashboardTab('content')">✏️ Content Editor</button>
+                        <button class="nav-btn" onclick="showDashboardTab('images')">🎨 Image Studio</button>
+                    </div>
+
+                    <!-- Overview Tab -->
+                    <div id="overview-tab" class="dashboard-tab">
+                        <div class="dashboard-stats">
+                            <div class="stat-card">
+                                <div class="stat-number" id="totalInquiries">0</div>
+                                <div class="stat-label">Total Inquiries</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number" id="newInquiries">0</div>
+                                <div class="stat-label">New This Week</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number" id="totalSales">$0</div>
+                                <div class="stat-label">Total Sales</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number" id="socialFollowers">0</div>
+                                <div class="stat-label">Social Followers</div>
+                            </div>
+                        </div>
+
+                        <h3 style="color: #DC2626; margin-top: 30px;">Quick Actions</h3>
+                        <div style="display: flex; gap: 15px; margin-top: 15px; flex-wrap: wrap;">
+                            <button class="btn btn-small" onclick="showDashboardTab('leads')">View New Leads</button>
+                            <button class="btn btn-small" onclick="showDashboardTab('social')">Schedule Post</button>
+                            <button class="btn btn-small" onclick="showDashboardTab('images')">Generate Image</button>
+                            <button class="btn btn-small" onclick="showDashboardTab('ecommerce')">Add Product</button>
+                        </div>
+                    </div>
+
+                    <!-- Leads Management Tab -->
+                    <div id="leads-tab" class="dashboard-tab hidden">
+                        <h3 style="color: #DC2626;">Lead Management</h3>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Fitness Level</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leads-tbody">
+                                <tr>
+                                    <td colspan="7" style="text-align: center; color: #666;">No leads yet. Share your platform to start getting inquiries!</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- E-Commerce Tab -->
+                    <div id="ecommerce-tab" class="dashboard-tab hidden">
+                        <h3 style="color: #DC2626;">E-Commerce Management</h3>
+                        
+                        <div style="margin-bottom: 30px;">
+                            <button class="btn btn-small" onclick="showAddProduct()">+ Add New Product</button>
+                            <button class="btn btn-secondary btn-small" onclick="showOrders()">View Orders</button>
+                        </div>
+
+                        <div id="add-product-form" class="hidden">
+                            <h4>Add New Product</h4>
+                            <form onsubmit="addProduct(event)">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Product Name</label>
+                                        <input type="text" name="productName" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Price ($)</label>
+                                        <input type="number" name="productPrice" step="0.01" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea name="productDescription" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <select name="productCategory" required>
+                                        <option value="">Select category</option>
+                                        <option value="coaching">Coaching Programs</option>
+                                        <option value="nutrition">Nutrition Plans</option>
+                                        <option value="supplements">Supplements</option>
+                                        <option value="merchandise">Merchandise</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn">Add Product</button>
+                                <button type="button" class="btn btn-secondary" onclick="hideAddProduct()">Cancel</button>
+                            </form>
+                        </div>
+
+                        <div class="product-grid" id="products-grid">
+                            <!-- Products will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Social Media Tab -->
+                    <div id="social-tab" class="dashboard-tab hidden">
+                        <h3 style="color: #DC2626;">Social Media Management</h3>
+                        
+                        <div style="margin-bottom: 30px;">
+                            <button class="btn btn-small" onclick="showSchedulePost()">📅 Schedule Post</button>
+                            <button class="btn btn-secondary btn-small" onclick="showSocialAnalytics()">📊 Analytics</button>
+                        </div>
+
+                        <div id="schedule-post-form" class="hidden">
+                            <h4>Schedule Social Media Post</h4>
+                            <form onsubmit="schedulePost(event)">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Platform</label>
+                                        <select name="platform" required>
+                                            <option value="">Select platform</option>
+                                            <option value="instagram">Instagram</option>
+                                            <option value="facebook">Facebook</option>
+                                            <option value="tiktok">TikTok</option>
+                                            <option value="twitter">Twitter</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Schedule Date/Time</label>
+                                        <input type="datetime-local" name="scheduleTime" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Post Content</label>
+                                    <textarea name="postContent" placeholder="Write your post content..." required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Hashtags</label>
+                                    <input type="text" name="hashtags" placeholder="#fitness #coaching #transformation">
+                                </div>
+                                <button type="submit" class="btn">Schedule Post</button>
+                                <button type="button" class="btn btn-secondary" onclick="hideSchedulePost()">Cancel</button>
+                            </form>
+                        </div>
+
+                        <div id="scheduled-posts">
+                            <h4>Scheduled Posts</h4>
+                            <div id="posts-list">
+                                <!-- Scheduled posts will appear here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Editor Tab -->
+                    <div id="content-tab" class="dashboard-tab hidden">
+                        <h3 style="color: #DC2626;">Content Editor</h3>
+                        <p>Edit your website content and pages</p>
+
+                        <div class="content-editor">
+                            <h4>Edit Landing Page Content</h4>
+                            <div class="editor-toolbar">
+                                <button class="editor-btn" onclick="formatText('bold')"><b>B</b></button>
+                                <button class="editor-btn" onclick="formatText('italic')"><i>I</i></button>
+                                <button class="editor-btn" onclick="formatText('underline')"><u>U</u></button>
+                                <button class="editor-btn" onclick="insertHeading()">H1</button>
+                                <button class="editor-btn" onclick="insertList()">List</button>
+                                <button class="editor-btn" onclick="insertLink()">Link</button>
+                            </div>
+                            <div class="editor-content" contenteditable="true" id="content-editor">
+                                <h2>Free Consultation</h2>
+                                <p>Start Your Transformation Journey Today</p>
+                                <h3>What You'll Get in Your Free Consultation:</h3>
+                                <ul>
+                                    <li>Personalized fitness assessment</li>
+                                    <li>Custom nutrition plan discussion</li>
+                                    <li>Goal setting and timeline planning</li>
+                                    <li>Program recommendations tailored to you</li>
+                                    <li>Pricing options that fit your budget</li>
+                                </ul>
+                            </div>
+                            <div style="margin-top: 15px;">
+                                <button class="btn" onclick="saveContent()">Save Changes</button>
+                                <button class="btn btn-secondary" onclick="previewContent()">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image Studio Tab -->
+                    <div id="images-tab" class="dashboard-tab hidden">
+                        <h3 style="color: #DC2626;">Image Studio</h3>
+                        
+                        <div style="margin-bottom: 30px;">
+                            <button class="btn btn-small" onclick="showImageGenerator()">🎨 Generate Image</button>
+                            <button class="btn btn-secondary btn-small" onclick="showImageUpload()">📁 Upload Images</button>
+                        </div>
+
+                        <!-- Image Generator -->
+                        <div id="image-generator" class="hidden">
+                            <h4>AI Image Generator</h4>
+                            <form onsubmit="generateImage(event)">
+                                <div class="form-group">
+                                    <label>Image Description</label>
+                                    <textarea name="imagePrompt" placeholder="Describe the image you want to generate (e.g., 'Muscular athlete doing deadlifts in a modern gym, professional fitness photography style')" required></textarea>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Style</label>
+                                        <select name="imageStyle">
+                                            <option value="photography">Photography</option>
+                                            <option value="illustration">Illustration</option>
+                                            <option value="graphic">Graphic Design</option>
+                                            <option value="social">Social Media Post</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Aspect Ratio</label>
+                                        <select name="aspectRatio">
+                                            <option value="square">Square (1:1)</option>
+                                            <option value="landscape">Landscape (16:9)</option>
+                                            <option value="portrait">Portrait (9:16)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn">Generate Image</button>
+                                <button type="button" class="btn btn-secondary" onclick="hideImageGenerator()">Cancel</button>
+                            </form>
+                        </div>
+
+                        <!-- Image Upload -->
+                        <div id="image-upload-section" class="hidden">
+                            <h4>Upload Images</h4>
+                            <div class="image-upload-area" onclick="document.getElementById('file-input').click()">
+                                <p>📁 Click to upload images or drag and drop</p>
+                                <p style="color: #666; font-size: 14px;">Supports JPG, PNG, GIF up to 10MB</p>
+                            </div>
+                            <input type="file" id="file-input" multiple accept="image/*" style="display: none;" onchange="handleFileUpload(event)">
+                        </div>
+
+                        <!-- Uploaded Images Gallery -->
+                        <div id="images-gallery">
+                            <h4>Your Images</h4>
+                            <div class="uploaded-images" id="uploaded-images-grid">
+                                <!-- Uploaded images will appear here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 RippedCity Coaching | Complete Business Management Platform</p>
+    </footer>
+
+    <script>
+        // Navigation functions
+        function showInquiry() {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById('inquiry-section').classList.add('active');
+        }
+
+        function showCoachLogin() {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById('login-section').classList.add('active');
+        }
+
+        function showDashboard() {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById('dashboard-section').classList.add('active');
+            loadDashboardData();
+        }
+
+        function logout() {
+            localStorage.removeItem('coachLoggedIn');
+            showInquiry();
+        }
+
+        // Dashboard tab navigation
+        function showDashboardTab(tabName) {
+            // Update nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show selected tab
+            document.querySelectorAll('.dashboard-tab').forEach(tab => tab.classList.add('hidden'));
+            document.getElementById(tabName + '-tab').classList.remove('hidden');
+            
+            // Load tab-specific data
+            if (tabName === 'leads') loadLeads();
+            if (tabName === 'ecommerce') loadProducts();
+            if (tabName === 'social') loadSocialPosts();
+            if (tabName === 'images') loadImages();
+        }
+
+        // Form submission functions
+        async function submitInquiry(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const inquiryData = Object.fromEntries(formData.entries());
+            inquiryData.timestamp = new Date().toISOString();
+            inquiryData.id = Date.now().toString();
+            
+            try {
+                let inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+                inquiries.push(inquiryData);
+                localStorage.setItem('inquiries', JSON.stringify(inquiries));
+                
+                alert('Thank you! Your consultation request has been submitted. We\'ll contact you within 24 hours.');
+                event.target.reset();
+                
+            } catch (error) {
+                alert('There was an error submitting your request. Please try again.');
+                console.error('Error:', error);
+            }
+        }
+
+        function coachLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (email === 'coach@rippedcitycoaching.training' && password === 'RippedCoach2024!') {
+                localStorage.setItem('coachLoggedIn', 'true');
+                showDashboard();
+            } else {
+                alert('Invalid credentials. Please check your email and password.');
+            }
+        }
+
+        // Dashboard data loading
+        function loadDashboardData() {
+            const inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+            const products = JSON.parse(localStorage.getItem('products') || '[]');
+            const posts = JSON.parse(localStorage.getItem('socialPosts') || '[]');
+            
+            document.getElementById('totalInquiries').textContent = inquiries.length;
+            
+            const oneWeekAgo = new Date();
+            oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+            const newInquiries = inquiries.filter(i => new Date(i.timestamp) > oneWeekAgo);
+            document.getElementById('newInquiries').textContent = newInquiries.length;
+            
+            const totalSales = products.reduce((sum, p) => sum + (p.sales || 0), 0);
+            document.getElementById('totalSales').textContent = '$' + totalSales.toFixed(2);
+            
+            document.getElementById('socialFollowers').textContent = '1.2K'; // Mock data
+        }
+
+        function loadLeads() {
+            const inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+            const tbody = document.getElementById('leads-tbody');
+            
+            if (inquiries.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #666;">No leads yet. Share your platform to start getting inquiries!</td></tr>';
+            } else {
+                tbody.innerHTML = inquiries.slice(-20).reverse().map(inquiry => `
+                    <tr>
+                        <td>${inquiry.firstName} ${inquiry.lastName}</td>
+                        <td>${inquiry.email}</td>
+                        <td>${inquiry.phone || 'N/A'}</td>
+                        <td>${inquiry.fitnessLevel}</td>
+                        <td>${new Date(inquiry.timestamp).toLocaleDateString()}</td>
+                        <td><span style="color: #DC2626; font-weight: bold;">New</span></td>
+                        <td>
+                            <button class="btn btn-small" onclick="contactLead('${inquiry.id}')">Contact</button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+        }
+
+        // E-commerce functions
+        function showAddProduct() {
+            document.getElementById('add-product-form').classList.remove('hidden');
+        }
+
+        function hideAddProduct() {
+            document.getElementById('add-product-form').classList.add('hidden');
+        }
+
+        function addProduct(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const productData = Object.fromEntries(formData.entries());
+            productData.id = Date.now().toString();
+            productData.sales = 0;
+            productData.created = new Date().toISOString();
+            
+            let products = JSON.parse(localStorage.getItem('products') || '[]');
+            products.push(productData);
+            localStorage.setItem('products', JSON.stringify(products));
+            
+            hideAddProduct();
+            loadProducts();
+            event.target.reset();
+            alert('Product added successfully!');
+        }
+
+        function loadProducts() {
+            const products = JSON.parse(localStorage.getItem('products') || '[]');
+            const grid = document.getElementById('products-grid');
+            
+            if (products.length === 0) {
+                grid.innerHTML = '<p style="text-align: center; color: #666;">No products yet. Add your first product to start selling!</p>';
+            } else {
+                grid.innerHTML = products.map(product => `
+                    <div class="product-card">
+                        <div class="product-image">📦 ${product.productName}</div>
+                        <h4>${product.productName}</h4>
+                        <p style="color: #DC2626; font-weight: bold;">$${product.productPrice}</p>
+                        <p style="color: #666; font-size: 14px;">${product.productDescription}</p>
+                        <div style="margin-top: 15px;">
+                            <button class="btn btn-small" onclick="editProduct('${product.id}')">Edit</button>
+                            <button class="btn btn-secondary btn-small" onclick="deleteProduct('${product.id}')">Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Social media functions
+        function showSchedulePost() {
+            document.getElementById('schedule-post-form').classList.remove('hidden');
+        }
+
+        function hideSchedulePost() {
+            document.getElementById('schedule-post-form').classList.add('hidden');
+        }
+
+        function schedulePost(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const postData = Object.fromEntries(formData.entries());
+            postData.id = Date.now().toString();
+            postData.status = 'scheduled';
+            postData.created = new Date().toISOString();
+            
+            let posts = JSON.parse(localStorage.getItem('socialPosts') || '[]');
+            posts.push(postData);
+            localStorage.setItem('socialPosts', JSON.stringify(posts));
+            
+            hideSchedulePost();
+            loadSocialPosts();
+            event.target.reset();
+            alert('Post scheduled successfully!');
+        }
+
+        function loadSocialPosts() {
+            const posts = JSON.parse(localStorage.getItem('socialPosts') || '[]');
+            const container = document.getElementById('posts-list');
+            
+            if (posts.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #666;">No scheduled posts. Create your first post!</p>';
+            } else {
+                container.innerHTML = posts.slice(-10).reverse().map(post => `
+                    <div class="social-post">
+                        <div class="post-header">
+                            <span class="post-platform">${post.platform.toUpperCase()}</span>
+                            <span style="color: #666; font-size: 14px;">${new Date(post.scheduleTime).toLocaleString()}</span>
+                        </div>
+                        <p>${post.postContent}</p>
+                        ${post.hashtags ? `<p style="color: #DC2626; font-size: 14px;">${post.hashtags}</p>` : ''}
+                        <div style="margin-top: 10px;">
+                            <button class="btn btn-small" onclick="editPost('${post.id}')">Edit</button>
+                            <button class="btn btn-secondary btn-small" onclick="deletePost('${post.id}')">Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Content editor functions
+        function formatText(command) {
+            document.execCommand(command, false, null);
+        }
+
+        function insertHeading() {
+            document.execCommand('formatBlock', false, 'h3');
+        }
+
+        function insertList() {
+            document.execCommand('insertUnorderedList', false, null);
+        }
+
+        function insertLink() {
+            const url = prompt('Enter URL:');
+            if (url) {
+                document.execCommand('createLink', false, url);
+            }
+        }
+
+        function saveContent() {
+            const content = document.getElementById('content-editor').innerHTML;
+            localStorage.setItem('pageContent', content);
+            alert('Content saved successfully!');
+        }
+
+        function previewContent() {
+            const content = document.getElementById('content-editor').innerHTML;
+            const previewWindow = window.open('', '_blank');
+            previewWindow.document.write(`
+                <html>
+                    <head><title>Content Preview</title></head>
+                    <body style="font-family: Arial, sans-serif; padding: 20px;">
+                        ${content}
+                    </body>
+                </html>
+            `);
+        }
+
+        // Image functions
+        function showImageGenerator() {
+            document.getElementById('image-generator').classList.remove('hidden');
+        }
+
+        function hideImageGenerator() {
+            document.getElementById('image-generator').classList.add('hidden');
+        }
+
+        function showImageUpload() {
+            document.getElementById('image-upload-section').classList.remove('hidden');
+        }
+
+        function generateImage(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const imageData = Object.fromEntries(formData.entries());
+            
+            // Simulate image generation (in real app, call AI service)
+            const mockImageUrl = `https://via.placeholder.com/400x400/DC2626/FFFFFF?text=${encodeURIComponent(imageData.imagePrompt.substring(0, 20))}`;
+            
+            const generatedImage = {
+                id: Date.now().toString(),
+                url: mockImageUrl,
+                prompt: imageData.imagePrompt,
+                style: imageData.imageStyle,
+                aspectRatio: imageData.aspectRatio,
+                created: new Date().toISOString()
+            };
+            
+            let images = JSON.parse(localStorage.getItem('generatedImages') || '[]');
+            images.push(generatedImage);
+            localStorage.setItem('generatedImages', JSON.stringify(images));
+            
+            hideImageGenerator();
+            loadImages();
+            event.target.reset();
+            alert('Image generated successfully!');
+        }
+
+        function handleFileUpload(event) {
+            const files = event.target.files;
+            
+            for (let file of files) {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const uploadedImage = {
+                            id: Date.now().toString() + Math.random(),
+                            url: e.target.result,
+                            name: file.name,
+                            size: file.size,
+                            uploaded: new Date().toISOString()
+                        };
+                        
+                        let images = JSON.parse(localStorage.getItem('uploadedImages') || '[]');
+                        images.push(uploadedImage);
+                        localStorage.setItem('uploadedImages', JSON.stringify(images));
+                        
+                        loadImages();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        }
+
+        function loadImages() {
+            const generatedImages = JSON.parse(localStorage.getItem('generatedImages') || '[]');
+            const uploadedImages = JSON.parse(localStorage.getItem('uploadedImages') || '[]');
+            const allImages = [...generatedImages, ...uploadedImages];
+            
+            const grid = document.getElementById('uploaded-images-grid');
+            
+            if (allImages.length === 0) {
+                grid.innerHTML = '<p style="text-align: center; color: #666;">No images yet. Generate or upload your first image!</p>';
+            } else {
+                grid.innerHTML = allImages.slice(-20).reverse().map(image => `
+                    <div class="uploaded-image">
+                        <img src="${image.url}" alt="${image.name || 'Generated image'}">
+                        <div class="image-actions">
+                            <button class="image-action-btn" onclick="downloadImage('${image.url}', '${image.name || 'image'}')">⬇</button>
+                            <button class="image-action-btn" onclick="deleteImage('${image.id}')">🗑</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function downloadImage(url, name) {
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = name;
+            link.click();
+        }
+
+        function deleteImage(id) {
+            if (confirm('Delete this image?')) {
+                let generatedImages = JSON.parse(localStorage.getItem('generatedImages') || '[]');
+                let uploadedImages = JSON.parse(localStorage.getItem('uploadedImages') || '[]');
+                
+                generatedImages = generatedImages.filter(img => img.id !== id);
+                uploadedImages = uploadedImages.filter(img => img.id !== id);
+                
+                localStorage.setItem('generatedImages', JSON.stringify(generatedImages));
+                localStorage.setItem('uploadedImages', JSON.stringify(uploadedImages));
+                
+                loadImages();
+            }
+        }
+
+        // Utility functions
+        function contactLead(id) {
+            const inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+            const lead = inquiries.find(i => i.id === id);
+            if (lead) {
+                window.open(`mailto:${lead.email}?subject=Your RippedCity Coaching Consultation&body=Hi ${lead.firstName}, thank you for your interest in RippedCity Coaching...`);
+            }
+        }
+
+        function editProduct(id) {
+            alert('Product editing feature coming soon!');
+        }
+
+        function deleteProduct(id) {
+            if (confirm('Delete this product?')) {
+                let products = JSON.parse(localStorage.getItem('products') || '[]');
+                products = products.filter(p => p.id !== id);
+                localStorage.setItem('products', JSON.stringify(products));
+                loadProducts();
+            }
+        }
+
+        function editPost(id) {
+            alert('Post editing feature coming soon!');
+        }
+
+        function deletePost(id) {
+            if (confirm('Delete this post?')) {
+                let posts = JSON.parse(localStorage.getItem('socialPosts') || '[]');
+                posts = posts.filter(p => p.id !== id);
+                localStorage.setItem('socialPosts', JSON.stringify(posts));
+                loadSocialPosts();
+            }
+        }
+
+        // Drag and drop for image upload
+        const uploadArea = document.querySelector('.image-upload-area');
+        if (uploadArea) {
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                
+                const files = e.dataTransfer.files;
+                document.getElementById('file-input').files = files;
+                handleFileUpload({ target: { files } });
+            });
+        }
+
+        // Initialize
+        if (localStorage.getItem('coachLoggedIn') === 'true') {
+            if (window.location.hash === '#dashboard') {
+                showDashboard();
+            }
+        }
+
+        // Load saved content
+        const savedContent = localStorage.getItem('pageContent');
+        if (savedContent) {
+            document.getElementById('content-editor').innerHTML = savedContent;
+        }
+    </script>
 </body>
 </html>
 
